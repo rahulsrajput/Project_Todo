@@ -17,18 +17,30 @@ def home(request):
 
 
 def delete_task(request, id):
-    if request.method == 'POST':
-        obj = Todo.objects.get(pk = id)
-        obj.delete()
+    try:
+        if request.method == 'POST':
+            obj = Todo.objects.get(pk = id)
+            obj.delete()
         return HttpResponseRedirect('/')
+    
+    except Exception as e:
+        print(e)
+        return HttpResponseRedirect('/')
+
 
 
 def update_task(request, id):
-    if request.method == 'POST':
-        task = request.POST['task']
-        update_obj = Todo(pk=id, task=task)
-        update_obj.save()
-        return HttpResponseRedirect('/')
+    try:
 
-    obj = Todo.objects.get(pk=id)
-    return render(request, 'base/update.html',context={'obj':obj})
+        if request.method == 'POST':
+            task = request.POST['task']
+            update_obj = Todo(pk=id, task=task)
+            update_obj.save()
+            return HttpResponseRedirect('/')
+
+        obj = Todo.objects.get(pk=id)
+        return render(request, 'base/update.html',context={'obj':obj})
+    
+    except Exception as e:
+        print(e)
+        return HttpResponseRedirect('/') 
