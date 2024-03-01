@@ -24,15 +24,22 @@
 
                         <ul class="list-group mb-0">
                             {% for i in objects %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                
-                                <div class="d-flex align-items-center">
+                            <li
+                                class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+
+                                <div class="d-flex align-items-center" >
                                     <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                    {{i.task}}
+                                    <span>{{i.task}}</span>
                                 </div>
-                                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                    <i class="fas fa-times text-primary"></i>
-                                </a>
+
+                                <form action="{% url 'delete' i.id %}" method="post">
+                                    {% csrf_token %}
+                                    
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-times text-white"></i>
+                                    </button>
+
+                                </form>
                             </li>
                             {% endfor %}
                         </ul>
@@ -44,4 +51,6 @@
         </div>
     </div>
 </section>
+
+
 {% endblock %}
