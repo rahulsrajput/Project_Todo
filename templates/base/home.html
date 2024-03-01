@@ -11,7 +11,7 @@
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body">
 
-                        <h6 class="mb-3">Awesome Todo List</h6>
+                        <h6 class="mb-3">Todo List</h6>
 
                         <form action="" method="post" class="d-flex justify-content-center align-items-center mb-4">
                             {% csrf_token %}
@@ -29,7 +29,7 @@
 
                                 <div class="d-flex align-items-center" >
                                     <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                    <span>{{i.task}}</span>
+                                    <span><a href="" class="anchor">{{i.task}}</a></span>
                                 </div>
 
                                 <form action="{% url 'delete' i.id %}" method="post">
