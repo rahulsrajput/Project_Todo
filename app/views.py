@@ -21,4 +21,14 @@ def delete_task(request, id):
         obj = Todo.objects.get(pk = id)
         obj.delete()
         return HttpResponseRedirect('/')
-    
+
+
+def update_task(request, id):
+    if request.method == 'POST':
+        task = request.POST['task']
+        update_obj = Todo(pk=id, task=task)
+        update_obj.save()
+        return HttpResponseRedirect('/')
+
+    obj = Todo.objects.get(pk=id)
+    return render(request, 'base/update.html',context={'obj':obj})
